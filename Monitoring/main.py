@@ -164,20 +164,15 @@ def main():
             Co2 = co2Sensor.read()
 
             # Clear screen first
-            screen.blank()
+            # screen.blank()
 
             # Write text if we get a value from Co2 readings.
             if Co2 is not None:
 
                 # Write text onto the display
-                screen.write(0, "Co2 : " + str(Co2).rjust(4, ' ')
-                             + " PPM")
-
-                screen.write(16, "TEM : " + "{:.1f}".format(temperature)
-                             + " C")
-
-                screen.write(32, "HUM : {:.1f}".format(humidity) +
-                             " %")
+                # screen.write(0, "Co2 : " + str(Co2).rjust(4, ' ') + " PPM")
+                # screen.write(16, "TEM : " + "{:.1f}".format(temperature) + " C")
+                # screen.write(32, "HUM : {:.1f}".format(humidity) + " %")
 
                 # Keep track of averages
                 averageHumiditySum += humidity
@@ -214,7 +209,7 @@ def main():
                     startTime = startTime + timedelta(seconds=10)
 
                 # Depending on the delay, write text on the display
-                screen.write(48, startTime.strftime('%d/%m %H:%M:%S'))
+                # screen.write(48, startTime.strftime('%d/%m %H:%M:%S'))
 
                 # Print onto the terminal
                 print('Current: {0}, {1:0.1f} C, {2:0.1f} %, {3} ppm \r'.format(
@@ -246,14 +241,14 @@ def main():
             else:
 
                 # If any errors in readings display ERROR
-                screen.write(0, "Co2 : " + "ERROR")
-                screen.write(16, "TEM : " + "ERROR")
-                screen.write(32, "HUM : " + "ERROR")
+                # screen.write(0, "Co2 : " + "ERROR")
+                # screen.write(16, "TEM : " + "ERROR")
+                # screen.write(32, "HUM : " + "ERROR")
 
                 startTime = clock.now()
-                screen.write(48, startTime.strftime('%d/%m %H:%M:%S'))
+                # screen.write(48, startTime.strftime('%d/%m %H:%M:%S'))
 
-            screen.flush()
+            # screen.flush()
 
         # If any unwanted exceptions
         except Exception as exception:
@@ -270,7 +265,7 @@ def main():
 
 if __name__ == '__main__':
 
-    setup()
+    # setup()
 
     try:
         main()
@@ -282,13 +277,13 @@ if __name__ == '__main__':
 
         print("\n Preparing to close application. Please wait for 3 seconds...\n")
 
-        screen.closing_remarks()
-        time.sleep(1.5)
+        # screen.closing_remarks()
+        # time.sleep(1.5)
 
-        screen.goodbye()
-        time.sleep(1.5)
+        # screen.goodbye()
+        # time.sleep(1.5)
 
-        screen.shutdown()
+        # screen.shutdown()
 
         # Close csv file
         excelFile.exit()
