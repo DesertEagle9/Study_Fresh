@@ -137,4 +137,4 @@ co2Sensor = CO2Sensor()
 excelFile = Logger("./datalog.csv")
 
 # Class to manager the Display
-screen = DisplayScreen()
+# screen = DisplayScreen()
