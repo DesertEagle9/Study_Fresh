@@ -22,8 +22,9 @@
 ###################################################################
 # File Imports
 ###################################################################
-# Adafruit library for the SSD1306
-import Adafruit_SSD1306
+import adafruit_ssd1306 # adafruit library for the SSD1306
+import board # board library to identify GPIO pins
+import busio # busio libary to initialise I2C
 
 # Library file to draw the contents of the image
 # Libraries for Display
@@ -34,8 +35,8 @@ from PIL import ImageFont
 ###################################################################
 # Global Variables
 ###################################################################
-# RST varlaible is the reset signal for Display
-RST = 24
+# Initialise I2C instance using busio library
+i2c = busio.I2C(board.SCL, board.SDA) 
 
 ###################################################################
 # Global Classes
@@ -59,11 +60,11 @@ class DisplayScreen:
             """
 
             # 128x64 display with hardware I2C:
-            self.disp = Adafruit_SSD1306.SSD1306_128_64(rst=RST)
+            self.disp = adafruit_ssd1306.SSD1306_I2C(128, 64, i2c)
 
-            # Initialize library.
-            self.disp.begin()
-            self.disp.clear()
+            # clear display.
+            self.disp.fill(0)
+            self.disp.show()
 
             # Create blank image for drawing.
             # Make sure to create image with mode '1' for 1-bit color.
@@ -124,7 +125,7 @@ class DisplayScreen:
 
             # Display image
             self.disp.image(self.image)
-            self.disp.display()
+            self.disp.show()
 
 
       def opening_credits(self):
@@ -147,7 +148,7 @@ class DisplayScreen:
 
             # Display image
             self.disp.image(self.image)
-            self.disp.display()
+            self.disp.show()
 
       def closing_remarks(self):
 
@@ -168,7 +169,7 @@ class DisplayScreen:
 
             # Display image.
             self.disp.image(self.image)
-            self.disp.display()
+            self.disp.show()
 
       def goodbye(self):
 
@@ -189,7 +190,7 @@ class DisplayScreen:
 
             # Display image.
             self.disp.image(self.image)
-            self.disp.display()
+            self.disp.show()
 
       def shutdown(self):
 
@@ -199,9 +200,8 @@ class DisplayScreen:
                 Outputs: None
             """ 
 
-            self.disp.clear()
-            self.disp.reset()
-            self.disp.display()
+            self.disp.fill(0)
+            self.disp.show()
 
       def flush(self):
 
@@ -211,4 +211,4 @@ class DisplayScreen:
                 Outputs: None
             """ 
             self.disp.image(self.image)
-            self.disp.display()
+            self.disp.show()
